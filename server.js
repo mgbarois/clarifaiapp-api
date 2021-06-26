@@ -13,8 +13,10 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-        host: process.env.DATABSE_URL,
-        ssl: 'true'
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
         // host: '127.0.0.1',
         // user: 'postgres',
         // password: 'postgres',
@@ -33,18 +35,18 @@ app.get('/', (req, res) => {
     res.send("It is working");
 })
 
-app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt)}); // Second parameter = function that calls another function with the same + more parameters. (Dependency injection)
+app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) }); // Second parameter = function that calls another function with the same + more parameters. (Dependency injection)
 
 //Could also do (With modification 1 in signin.js):
 //app.post('/signin', signin.handleSignin(db, bcrypt));
 
-app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt) });
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
 
-app.get('/profile/:id', (req, res) => {profile.handleProfile(req, res, db) });
+app.get('/profile/:id', (req, res) => { profile.handleProfile(req, res, db) });
 
-app.post('/imageUrl', (req, res) => {image.handleApiCall(req, res) });
+app.post('/imageUrl', (req, res) => { image.handleApiCall(req, res) });
 
-app.put('/image', (req, res) => {image.handleImage(req, res, db)});
+app.put('/image', (req, res) => { image.handleImage(req, res, db) });
 
 app.listen(process.env.PORT || 3001, () => {
     console.log(`App is runnin on port ${process.env.PORT}`);
