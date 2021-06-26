@@ -13,10 +13,12 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-        host: 'postgresql-angular-04088', // 127.0.0.1
-        user: 'postgres',
-        password: 'postgres',
-        database: 'clarifai'
+        host: process.env.DATABSE_URL,
+        ssl: 'true'
+        // host: '127.0.0.1',
+        // user: 'postgres',
+        // password: 'postgres',
+        // database: 'clarifai'
     }
 });
 
