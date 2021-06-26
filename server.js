@@ -43,9 +43,9 @@ app.post('/imageUrl', (req, res) => {image.handleApiCall(req, res) });
 
 app.put('/image', (req, res) => {image.handleImage(req, res, db)});
 
-app.listen(3001, () => {
-    console.log(`App is runnin on port ${3001}`);
-}) //Function will run on port 300 once it's running
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`App is runnin on port ${process.env.PORT}`);
+}) //Function will run on this port once it's running
 
 // Necessary Routes/endpoints:
 
